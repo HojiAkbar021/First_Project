@@ -1,0 +1,362 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{{ url }}</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ setting.logo.url }}">
+
+
+
+
+    <!-- CSS
+    ============================================ -->
+
+    <!-- Icon Font CSS -->
+    <!-- <link rel="stylesheet" href="assets/css/plugins/plazaicon.css">
+    <link rel="stylesheet" href="assets/css/plugins/fontawesome.min.css"> -->
+
+    <!-- Plugins CSS -->
+    <!-- <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/animate.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/jquery-ui.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/plugins/select2.min.css"> -->
+
+    <!-- Main Style CSS -->
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+
+
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+    <link rel="stylesheet" href="{% static 'assets/css/vendor/plugins.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.min.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
+        .menu-main {
+            background-color: #ff0000;
+        }
+        .menu-main {
+           list-style: none;
+           margin: 40px 0 5px;
+           padding: 25px 0 5px;
+           text-align: center;
+           background: rgba(255, 0, 0, 0);
+        }
+  
+        .menu-main li {
+           display: inline-block;
+        }
+  
+        .menu-main li:after {
+           content: "|";
+           color: #ff0000;
+           display: inline-block;
+           vertical-align: top;
+        }
+  
+        .menu-main li:last-child:after {
+           content: none;
+        }
+        .menu-main a {
+           text-decoration: none;
+           font-family: 'Ubuntu Condensed', sans-serif;
+           letter-spacing: 2px;
+           position: relative;
+           padding-bottom: 20px;
+           margin: 0 34px 0 30px;
+           font-size: 17px;
+           text-transform: uppercase;
+           display: inline-block;
+           transition: color .2s;
+        }
+  
+        .menu-main a,
+        .menu-main a:visited {
+           color: #ff0000;
+        }
+  
+        .menu-main a.current,
+        .menu-main a:hover {
+           color: #ffffff;
+        }
+  
+        .menu-main a:before,
+        .menu-main a:after {
+           content: "";
+           position: absolute;
+           height: 4px;
+           top: auto;
+           right: 50%;
+           bottom: -5px;
+           left: 50%;
+           background: #ffffff;
+           transition: .8s;
+        }
+  
+        .menu-main a:hover:before,
+        .menu-main .current:before {
+           left: 0;
+        }
+  
+        .menu-main a:hover:after,
+        .menu-main .current:after {
+           right: 0;
+        }
+  
+        @media (max-width:550px) {
+           .menu-main {
+              padding-top: 0
+           }
+  
+           .menu-main li {
+              display: block;
+           }
+  
+           .menu-main li:after {
+              content: none;
+           }
+  
+           .menu-main a {
+              padding: 25px 0 20px;
+              margin: 0 30px;
+           }
+        }
+.box{
+    position: relative;
+}
+
+.input {
+    margin-left:10px ;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: 4px solid rgb(255, 0, 0);
+    border-radius: 50px;
+    box-sizing: border-box;
+    font-family: Comic Sans MS;
+    font-size: 26px;
+    color: rgb(255, 4, 4);
+    outline: none;
+    transition: .5s;
+    align-items: center;
+}
+.box:hover input{
+    width: 350px;
+    background: #ffffff00;
+    border-radius: 10px;
+}
+.box i{
+    position: absolute;
+    top: 50%;
+    right: -2px;
+    transform: translate(-50%,-50%);
+    font-size: 26px;
+    color: rgb(255, 0, 0);
+    transition: .2s;
+}
+.box:hover i{
+    opacity: 0;
+    z-index: -1;
+}
+
+     </style>
+</head>
+<div class="section" style="background-image: url(../../media/logo/pngtree-blue-carbon-background-with-sport-style-and-golden-light-image_371487.jpg); background-repeat:no-repeat; background-size: 100% 100%;">
+    <!-- Header top Start -->
+    <div class="container" style="margin-bottom: -50px; margin-top: 50px;">
+        <div class="header-top">
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- Header Logo Start -->
+                        <div class="header-logo text-center">
+                            <a href="{% url 'index' %}"><img src="{{ setting.logo.url }}" width="30%" alt="" style="border-radius: 10%;"></a>
+                        </div>
+                        <!-- Header Logo End -->
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- Header Search Start -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Header top End -->
+
+    <!-- Header Bottom Start -->
+        <div class="header-bottom" style="margin-bottom: 50px;">
+            <div class="container">
+                <!-- Primary Menu Start -->
+                <ul class="menu-main">
+                    <ul>
+                        
+                        <li class="active">
+                            <a href="{% url 'index' %}"><i class="icon-home"></i>Home</a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                        <li class="active">
+                            <a href="{% url 'profile' request.user.slug %}"><i class="icon-user"></i> {{ request.user.username}} </a>
+                        {% else %}
+                        <li><a href="{% url 'user_login' %}">Войти</a></li>
+                        <li><a href="{% url 'register' %}">Зарегистрироваться</a></li>
+                        {% endif %}
+                        <li>
+                            <div class="box">
+                                <form name="search" action="{% url 'post_search' %}">
+                                    <input type="text" class="input" name="key">
+                                </form>
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </li>
+                    </ul>
+                  </ul>
+                <!-- Primary Menu End -->
+            </div>
+        </div>
+    <!-- Header Bottom End -->
+
+</div>  
+
+<body style="background-image: url(../../media/logo//22222.webp); background-size: 100%">
+    {% block content %}
+    
+    
+    
+    {% endblock %}
+<!-- footer Start -->
+<div class="section footer-bg" id="footer" style="margin-bottom: -600px;">
+    <!-- Footer Widget Section Start -->
+    <div class="footer-widget-section section-padding">
+        <div class="container">
+            <!-- footer Widget Wrapper -->
+            <div class="footer-widget-wrapper mt-n6">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+
+                        <!-- footer Widget Start -->
+                        <div class="footer-widget">
+                            <a href="index.html#"><img src="assets/images/logo-white.png" alt=""></a>
+                            <div class="footer-widget-text">
+                                <p class="desc">{{ setting.description }}</p>
+                                <p><strong>Адрес :</strong> {{ setting.address }}</p>
+                                <p><strong>Телефонный номер :</strong>{{ setting.phone }}</p>
+                                <p><strong>Почта :</strong>{{ setting.email }}</p>
+                            </div>
+                        </div>
+                        <!-- footer Widget End -->
+
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+
+                        <!-- footer Widget Start -->
+                        <div class="footer-widget">
+                            <h3 class="footer-widget-title">Information</h3>
+
+                            <ul class="widget-link">
+                                <li><a href="index.html#">Delivery</a></li>
+                                <li><a href="index.html#">About us</a></li>
+                                <li><a href="index.html#">Secure payment</a></li>
+                                <li><a href="index.html#">Contact us</a></li>
+                                <li><a href="index.html#">Sitemap</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                        <!-- footer Widget End -->
+
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
+
+                        <!-- footer Widget Start -->
+                        <div class="footer-widget">
+                            <h3 class="footer-widget-title">My Account</h3>
+
+                            <ul class="widget-link">
+                                <li><a href="my-account.html">My Account</a></li>
+                                <li><a href="checkout.html">Checkout</a></li>
+                                <li><a href="wishlist.html">Wishlist</a></li>
+                                <li><a href="login.html">Sign in</a></li>
+                            </ul>
+                        </div>
+                        <!-- footer Widget End -->
+
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+
+                        <!-- footer Widget Start -->
+                        <div class="footer-widget">
+                            
+
+                            <div class="widget-social">
+                                <ul>
+                                    <li><a class="facebook" href="{{ setting.facebook }}"><i class="icon-facebook2"></i></a></li>
+                                    <li><a class="twitter" href="{{ setting.twitter }}"><i class="icon-twitter2"></i></a></li>
+                                    <li><a class="youtube" href="{{ setting.youtube }}"><i class="icon-youtube2"></i></a></li>
+                                    <li><a class="instagram" href="{{ setting.instagram }}"><i class="icon-instagram2"></i></a></li>
+                                    <li><a class="linkedin" href="{{ setting.linkedin }}"><i class="icon-linkedin2"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- footer Widget End -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- footer Widget Wrapper -->
+        </div>
+    </div>
+    <!-- Footer Widget Section End -->
+
+    <!-- Copyright Start -->
+    <div class="copyright-section">
+        <div class="container">
+            <div class="copyright-payment-method">
+                <div class="copyright-text">
+                    <p>&copy; 2022 <span> IT-RUN </span> Made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://hasthemes.com/" target="_blank">Backend Run 6</a></p>
+                </div>
+                <div class="payment-method">
+                    <img src="{% static 'assets/images/payment.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+</div>
+<!-- footer End -->
+
+    <!-- JS
+    ============================================ -->
+
+    <!-- Modernizer & jQuery JS -->
+    <script src="{% static 'assets/js/vendor/modernizr-3.11.2.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/jquery-3.5.1.min.js' %}"></script>
+
+    <!-- Bootstrap JS -->
+    <!-- <script src="assets/js/plugins/popper.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.min.js"></script> -->
+
+    <!-- Plugins JS -->
+    <!-- <script src="assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="assets/js/plugins/jquery-ui.min.js"></script>
+    <script src="assets/js/plugins/jquery.zoom.min.js"></script>
+    <script src="assets/js/plugins/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/plugins/select2.min.js"></script>
+    <script src="assets/js/plugins/ajax-contact.js"></script> -->
+
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+    <script src="{% static 'assets/js/plugins.min.js' %}"></script>
+
+
+    <!-- Main JS -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+</body>
+</html>

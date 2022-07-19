@@ -1,0 +1,141 @@
+{% extends 'include/homepage.html' %}
+{% load static %}
+{% block content %}
+<!-- Ubani Slider & banner Start -->
+<div class="ubani-slider-banner">
+    <!-- Slider Start -->
+    <div class="section">
+        <div class="swiper-container slider-active"  style="width: 105%; margin-left: -2.5%;">
+            <div class="swiper-wrapper">
+                <!-- Single Slider Start -->
+                {% for post in pros %}
+                <div class="single-slider swiper-slide animation-style-01" style="background-image: url('{{ post.post_image.url }}');">
+                    <div class="container">
+                        <!-- Slider Content Start -->
+                        <div class="slider-content slider-content-02">
+                            <!-- <a href="{% url 'profile' post.user.slug %}"><h3 class="main-title" style="color: rgb(253, 253, 253); border-style: dotted; text-align: center; border-radius: 20px; padding: 3px; background-color: rgba(0, 0, 0, 0.582); "  >{{ post.user }}</h3></a> -->
+                            <p style="color: rgb(255, 255, 255); border-style: dotted;border-radius: 20px; text-align: center; background-color: rgba(0, 0, 0, 0.582);">Sale Offer 20% Off This Week</p>
+                            <p class="main-title" style="color: rgb(255, 255, 255); border-style: dotted;border-radius: 20px; text-align: center; background-color: rgba(0, 0, 0, 0.582);">{{ post.title | truncatewords:2 }}  </p>
+                            <p style="color: rgb(255, 255, 255); border-style: dotted;border-radius: 20px; text-align: center; background-color: rgba(0, 0, 0, 0.582);">{{ post.description | truncatewords:25 }}</p>
+                            {% if post.currency != 'Договорная' %}
+                            <p style="color: rgb(255, 255, 255); border-style: dotted;border-radius: 20px; text-align: center; background-color: rgba(0, 0, 0, 0.582);">{{ post.price }} {{ post.currency }}</p>
+                            {% else %}
+                            <p style="color: rgb(255, 255, 255); border-style: dotted;border-radius: 20px; text-align: center; background-color: rgba(0, 0, 0, 0.582);" >{{ post.currency }}</p>
+                            {% endif %}
+                            <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary btn-hover-dark">Посмотреть объявление</a>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <!-- Slider Content End -->
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- Single Slider End -->
+            </div>
+        </div>
+    </div>
+    <!-- Slider End -->
+
+</div>
+<!-- Ubani Slider & banner End -->
+
+ <!-- Blog Section Start -->
+ <div class="section section-padding">
+    <div class="container">
+        <h1 style="text-align: center; color: red;margin-top: -50px; margin-bottom: 50px; background-color: rgba(82, 82, 82, 0.582);" >ALL PRODUCTS</h1>
+        <div class="row">
+            {% for post in posts %}
+            <div class="main col-lg-3 col-sm-6 col-md-12">
+                <style>
+                    .main{
+                        color: rgba(255, 0, 0, 0.342);
+                        height: auto;
+                        min-height: 500px;
+                        background-color: #7efd0000;
+                        text-align: center;
+                        border-style: double; 
+                        position: relative;
+                        }
+                    .image-block{
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    }
+                    .username-block{
+                        color: rgb(255, 0, 0);
+                        background-color: rgba(82, 82, 82, 0.582); 
+                        border-radius: 20px; 
+                        padding-left: 10px; 
+                        padding-right: 10px; 
+                        width: 100%; 
+                        padding-top: 5px;
+                        margin-top: -20px;
+                    }
+                    .product-price-1{
+                        background-color: rgb(255, 0, 0);
+                        border-radius: 20px;
+                        width: 90%;
+                        color: white; 
+                        margin: 0 auto;
+                        bottom: 0;
+                    }
+                    .product-desc {
+                        padding: 5px;
+                        color: red;
+                        margin: 5px;
+                        border-radius: 10px;
+                        position: absolute;
+                        width: 95%;
+                        background-color: rgba(82, 82, 82, 0.582); 
+                        bottom: 0;
+                        margin-left: -4px;
+                    }
+                </style>
+                    <div class="single-blog-item" style="max-height: 550px;">
+                        <div class="username-block">
+                        <a href="{% url 'profile' post.user.slug %}"><h3>{{ post.user }} </h3></a>
+                        </div>
+                        <div class="image-block" >
+                            <a href="{% url 'post_detail' post.slug %}">
+                                <img src="{{ post.post_image.url }}" alt="asd" style="max-height: 420px;">
+                            </a>
+                        </div>
+                        <div class="product-desc">
+                            <h4 class="product-name"><a href="{% url 'post_detail' post.slug %}">{{ post.title | truncatewords:3 }}</a></h4>
+                            <h6 style="color: white;">{{ post.description | truncatewords:15 }}</h6>
+                            <div class="product-price-1">
+                                {% if post.currency != 'Договорная' %}
+                                <h4>{{ post.price }} {{ post.currency }}</h5>
+                                {% else %}
+                                <h5>{{ post.currency }}</h5>
+                                {% endif %}
+                                <!-- <span class="old-price">$23.90</span> -->
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            {% endfor %}    
+            <div class="col-lg-3 col-sm-6 col-md-12">
+                <!-- Single Blog Item Start -->
+                <div class="single-blog-item">
+                    <div class="blog-embed">
+                        <h4 class="post-title"><a href="blog-details-left-sidebar.html" style="background-color: rgba(82, 82, 82, 0.582); border-radius: 20px; padding-left: 10px; padding-right: 10px; width: 100%;">This is Secound Post For XipBlog</a></h4>
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/hHqW0gtiMy4" title="YouTube video" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <p class="meta-author">Posted by <a href="blog-grid.html#">HasThemes</a></p>
+                            <p class="meta-date">Aug 26TH, 2020</p>
+                        </div>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when ...</p>
+                    </div>
+                </div>
+                <!-- Single Blog Item End -->
+            </div>
+        </div>
+    </div>
+</div>  
+<!-- Blog Section End -->
+
+{% endblock %}

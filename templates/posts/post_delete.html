@@ -1,0 +1,65 @@
+{% extends 'include/homepage.html' %}
+{% load static %}
+{% block content %}
+
+
+{% if user.is_authenticated and request.user == post.user %}
+<!-- Page Banner Start -->
+<div class="page-banner-section section">
+    <div class="container">
+        <!-- Pager Banner Start -->
+        <div class="page-banner-content text-center">
+            <h2 class="page-banner-title">Удалить объявление</h2>
+            <ul class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item"><a href="index.html">Домой</a></li>
+                <li class="breadcrumb-item active">Удалить объявление</li>
+            </ul>
+        </div>
+        <!-- Pager Banner End -->
+    </div>
+</div>
+<!-- Page Banner End -->
+{% else %}
+<!-- Page Banner Start -->
+<div class="page-banner-section section">
+    <div class="container">
+        <!-- Pager Banner Start -->
+        <div class="page-banner-content text-center">
+            <h2 class="page-banner-title">У вас нет прав</h2>
+            <a href="index.html">Так как вы не зарегистрованный пользователь или же не зарегистрованы, вы не можете подавать объявление</a>
+            <ul class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item"><a href="{% url 'register' %}">Зарегистрироваться</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'user_login' %}">Войти</a></li>
+            </ul>
+        </div>
+        <!-- Pager Banner End -->
+    </div>
+</div>
+<!-- Page Banner End -->
+{% endif %}
+
+{% if user.is_authenticated and request.user == post.user %}
+<!-- Register Section Start -->
+<div class="section section-padding mt-n2">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <!-- Login & Register Start -->
+                <div class="login-register-wrapper">
+                    <h4 class="title">Вы уверены что хотите удалить объявление?</h4>
+                    <p><a href="login.html">После удаления данные пропадут навсегда</a></p>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Удалить пост {{ post.title }}</button>
+                    </form>
+                </div>
+                <!-- Login & Register End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Register Section End -->
+
+{% endif %}
+
+{% endblock %}

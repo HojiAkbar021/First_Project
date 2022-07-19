@@ -1,0 +1,119 @@
+{% extends 'include/homepage.html' %}
+{% load static %}
+{% block content %}
+    <!-- off Canvas Start -->
+    <div class="off-canvas-box">
+        <div class="canvas-action">
+            <a class="action" href="register.html#"><i class="icon-sliders"></i> Compare <span class="action-num">(0)</span></a>
+            <a class="action" href="register.html#"><i class="icon-heart"></i> Wishlist <span class="action-num">(0)</span></a>
+        </div>
+        <div class="canvas-close-bar">
+            <span>Menu</span>
+            <a class="menu-close" href="register.html#"><i class="icon-arrow-left"></i></a>
+        </div>
+        <div class="canvas-menu">
+            <nav>
+                <ul>
+                    <li class="active">
+                        <a href="register.html#">Home</a>
+                        <ul class="sub-menu">
+                            <li><a href="index.html">Home 01</a></li>
+                            <li><a href="index-2.html">Home 02</a></li>
+                            <li><a href="index-3.html">Home 03</a></li>
+                            <li><a href="index-4.html">Home 04</a></li>
+                        </ul>
+                         <a href="register.html#">Blog Details</a>
+                            <ul class="sub-menu">
+                                <li><a href="blog-details-left-sidebar.html">Blog details Left Sidebar</a></li>
+                                <li><a href="blog-details-right-sidebar.html">Blog details Right Sidebar</a></li>
+                            </ul>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- off Canvas End -->
+
+    <div class="menu-overlay"></div>
+
+
+    <!-- Page Banner Start -->
+    <div class="page-banner-section section">
+        <div class="container">
+            <!-- Pager Banner Start -->
+            <div class="page-banner-content text-center" style="margin-top: 50px;">
+                <h2 class="page-banner-title">Creat</h2>
+            </div>
+            <!-- Pager Banner End -->
+        </div>
+    </div>
+    <!-- Page Banner End -->
+
+    <!-- Register Section Start -->
+    <div class="section section-padding mt-n2">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <!-- Login & creat Start -->
+                    <div class="login-register-wrapper">
+                        <h4 class="title">Создать Пост</h4>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="single-form">
+                                <label class="form-label">title</label>
+                                <input type="text" name="title" class="form-control">
+                            </div>
+                            <div class="single-form">
+                                <label class="form-label">description</label>
+                                <input type="text" name="description" class="form-control">
+                            </div>
+                            <!-- <div class="single-form">
+                                <label class="form-label">Slug</label>
+                                <input type="text" name="slug" class="form-control">
+                            </div> -->
+                            <div class="single-form">
+                                <label class="form-label">price</label>
+                                <input type="number" name="price" class="form-control">
+                            </div>
+                            <div class="single-form">
+                                <label class="form-label">valyuta</label>
+                                <select size="1" name="currency" class="form-control">
+                                    <option value="KGZ" selected>KGZ</option>
+                                    <option value="USD">USD</option>
+                                    <option value="RUB">RUB</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="Договорная">Договорная</option>
+                                   </select>
+                            </div>
+                            <div class="single-form">
+                                <label class="form-label">category</label>
+                                <select size="1" name="category" class="form-control">
+                                    {% for category in categories %}
+                                    <option value="{{ category.id }}" selected>{{ category.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="single-form">
+                                <label for="img">Загрузите основное фото</label>
+                                <input type="file" class="form-control" id="img" name="post_image" accept="image/*">
+                            </div>
+                            <div class="single-form">
+                                <label for="img">Загрузите дополнительное фото</label>
+                                <input type="file" class="form-control" name="post_images" multiple>
+                            </div>
+                            <div class="single-form">
+                                <button class="btn btn-outline-dark">Cоздать</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Login & Register End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Register Section End -->
+
+   
+
+{% endblock %}

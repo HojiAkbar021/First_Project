@@ -1,0 +1,450 @@
+{% extends 'include/homepage.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Shopping Cart Section Start -->
+    {% if request.user.is_authenticated and request.user == user %}
+    <div class="section section-padding mt-n6" style="margin-bottom: 500px">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-md-4">
+                    <!-- My Account Menu Start -->
+                    <div class="my-account-menu mt-6">
+                        <ul class="nav account-menu-list flex-column">
+                            <li>
+                                <a class="active" data-bs-toggle="pill" href="my-account.html#pills-activ"><i class="fa fa-check-square"></i> Активные объявления</a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="pill" href="my-account.html#pills-deactiv"><i class="fa fa-times-square"></i> Неактивные объявления</a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="pill" href="my-account.html#pills-favorite"><i class="fa fa-heart-square"></i> Избранные объявления</a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="pill" href="my-account.html#pills-post"><i class="fa fa-shopping-cart"></i> Создать объявления</a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="pill" href="my-account.html#pills-profile"><i class="fa fa-address-card"></i> Мои профиль</a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="pill" href="my-account.html#pills-update"><i class="fa fa-pencil"></i> Редактировать профиль</a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="pill" href="my-account.html#pills-delete"><i class="fa fa-trash"></i> Удалить профиль</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>Выйти</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- My Account Menu End -->
+                </div>
+
+                <div class="col-xl-9 col-md-8" style="max-height: 200px; text-align: center; padding-bottom: 500px;">
+                    <!-- Tab content start -->
+                    <div class="tab-content my-account-tab mt-6" id="pills-tabContent">
+   
+                    <div class="tab-pane fade show active" id="pills-activ">
+                        <div class="my-account-activ account-wrapper">
+                            <h4 class="account-title">Активные объявления</h4>
+                            <div class="album py-5">
+                                <div class="container">
+                                    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4">
+                                        {% for post in user.post_user.all %}
+                                        {% if post.valid == True %}
+                                        <div class="col">
+                                            <div class="product-item" style="max-height: 550px;">
+                                                <div class="image-block" >
+                                                    <a href="{% url 'post_detail' post.slug %}">
+                                                    <img src="{{ post.post_image.url }}" alt="asd" style="max-height: 420px;">
+                                                </a>
+                                                <div class="product-action">
+                                                    {% if request.user.is_authenticated %}
+                                                        <form method = "POST" style="padding-top: 5px;">
+                                                            <button class="action-btn wishlist" name = "like" type="submit" style="color: rgb(255, 108, 108);"><i class="fa fa-heart"></i></button>
+                                                            {% csrf_token %}
+                                                        </form> 
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="product-desc">
+                                                <div class="product-features-reviews">
+                                                    {% if user.slug %}
+                                                    <a href="{% url 'profile' user.slug %}" class="features">{{ post.user }}</a>
+                                                    {% else %}
+                                                    <a href="{% url 'profile' user.id %}" class="features">{{ post.user }}</a>
+                                                    {% endif %}
+                                                    <div class="review-star">
+                                                        <div class="star" style="width: 100%;"></div>
+                                                    </div>
+                                                </div>
+                                                {% if post.slug %}
+                                                <h4 class="product-name"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h4>
+                                                {% else %}
+                                                <h4 class="product-name"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h4>
+                                                {% endif %}
+                                                <div class="product-price">
+                                                    {% if post.currency != 'Договорная' %}
+                                                    <span class="sale-price">{{ post.price }} {{ post.currency }}</span>
+                                                    {% else %}
+                                                    <span class="sale-price">{{ post.currency }}</span>
+                                                    {% endif %}
+                                                    <!-- <span class="old-price">$23.90</span> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                        <div class="tab-pane fade" id="pills-deactiv">
+                            <div class="my-account-deactiv account-wrapper">
+                                <h4 class="account-title">Неактивные объявления</h4>
+                                <div class="album py-5">
+                                    <div class="container">
+                                        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4">
+                                            {% for post in user.post_user.all %}
+                                            {% if post.valid == False %}
+                                            <div class="col">
+                                                <div class="product-item" style="max-height: 550px;">
+                                                    <div class="image-block" >
+                                                        <a href="{% url 'post_detail' post.slug %}">
+                                                            <img src="{{ post.post_image.url }}" alt="asd" style="max-height: 420px;">
+                                                        </a>
+                                                        <div class="product-action">
+                                                            {% if request.user.is_authenticated %}
+                                                                <form method = "POST" style="padding-top: 5px;">
+                                                                    <button class="action-btn wishlist" name = "like" type="submit" style="color: rgb(255, 108, 108);"><i class="fa fa-heart"></i></button>
+                                                                    {% csrf_token %}
+                                                                </form> 
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-desc">
+                                                        <div class="product-features-reviews">
+                                                            {% if user.slug %}
+                                                        <a href="{% url 'profile' user.slug %}" class="features">{{ post.user }}</a>
+                                                        {% else %}
+                                                        <a href="{% url 'profile' user.id %}" class="features">{{ post.user }}</a>
+                                                        {% endif %}
+                                                        <div class="review-star">
+                                                            <div class="star" style="width: 100%;"></div>
+                                                        </div>
+                                                    </div>
+                                                    {% if post.slug %}
+                                                    <h4 class="product-name"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h4>
+                                                    {% else %}
+                                                    <h4 class="product-name"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h4>
+                                                    {% endif %}
+                                                    <div class="product-price">
+                                                        {% if post.currency != 'Договорная' %}
+                                                        <span class="sale-price">{{ post.price }} {{ post.currency }}</span>
+                                                        {% else %}
+                                                        <span class="sale-price">{{ post.currency }}</span>
+                                                        {% endif %}
+                                                        <!-- <span class="old-price">$23.90</span> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="pills-favorite">
+                        <div class="my-account-favorite account-wrapper">
+                            <h4 class="account-title">Избранные объявления</h4>
+                            <div class="album py-5">
+                                <div class="container">
+                                    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4">
+                                        {% for post in posts %}
+                                        {% for id in favorite %}
+                                        {% if id.user.id ==  user.id and post.id == id.post.id %}
+                                        <div class="col">
+                                            <div class="product-item" style="max-height: 550px;">
+                                                <div class="image-block" >
+                                                    <a href="{% url 'post_detail' post.slug %}">
+                                                        <img src="{{ post.post_image.url }}" alt="asd" style="max-height: 420px;">
+                                                    </a>
+                                                    <div class="product-action">
+                                                        {% if request.user.is_authenticated %}
+                                                            <form method = "POST" style="padding-top: 5px;">
+                                                                <button class="action-btn wishlist" name = "like" type="submit" style="color: rgb(255, 108, 108);"><i class="fa fa-trash"></i></button>
+                                                                {% csrf_token %}
+                                                            </form> 
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="product-desc">
+                                                    <div class="product-features-reviews">
+                                                        {% if user.slug %}
+                                                        <a href="{% url 'profile' post.user.slug %}" class="features">{{ post.user }}</a>
+                                                        {% else %}
+                                                        <a href="{% url 'profile' post.user.id %}" class="features">{{ post.user }}</a>
+                                                        {% endif %}
+                                                        <div class="review-star">
+                                                            <div class="star" style="width: 100%;"></div>
+                                                        </div>
+                                                    </div>
+                                                    {% if post.slug %}
+                                                    <h4 class="product-name"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h4>
+                                                    {% else %}
+                                                    <h4 class="product-name"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h4>
+                                                    {% endif %}
+                                                    <div class="product-price">
+                                                        {% if post.currency != 'Договорная' %}
+                                                        <span class="sale-price">{{ post.price }} {{ post.currency }}</span>
+                                                        {% else %}
+                                                        <span class="sale-price">{{ post.currency }}</span>
+                                                        {% endif %}
+                                                        <!-- <span class="old-price">$23.90</span> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="pills-post">
+                        <div class="my-account-post account-wrapper">
+                            <h4 class="account-title">Создать объявления</h4>
+                                <div class="post-details">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="single-form">
+                                                    <label class="form-label">Title</label>
+                                                    <input type="text" name="title" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="single-form">
+                                                    <label class="form-label">Description</label>
+                                                <input type="text" name="description" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="single-form">
+                                                <label class="form-label">price</label>
+                                                <input type="number" name="price" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="single-form">
+                                                <label class="form-label">valyuta</label>
+                                                <select size="1" name="currency" class="form-control">
+                                                    <option value="KGZ">KGZ</option>
+                                                    <option value="USD">USD</option>
+                                                    <option value="RUB">RUB</option>
+                                                    <option value="EUR">EUR</option>
+                                                    <option value="Договорная">Договорная</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="single-form">
+                                                <label class="form-label">category</label>
+                                                <select size="1" name="category" class="form-control">
+                                                    {% for category in categories %}
+                                                    <option value="{{ category.id }}" selected>{{ category.title }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-form">
+                                                <label for="img">Загрузите основное фото</label>
+                                                <input type="file" class="form-control" id="img" name="post_image" accept="image/*">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-form">
+                                                <label for="img">Загрузите дополнительное фото</label>
+                                                <input type="file" class="form-control" name="post_images" multiple>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="single-form">
+                                                <button class="w-100 btn ame btn-primary btn-hover-dark" name="create" type="submit">Create</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-profile">
+                        <div class="my-account-profile account-wrapper">
+                            <div class="welcome-profile" style="text-decoration:underline" >
+                                <img src="{{ user.profile_image.url }}" alt="" style="border-radius:20%; width: 120px; margin: 10px;">
+                                <h3><i class="fa fa-user"></i>: {{ user.last_name }} {{ user.first_name }}</h2>
+                                <h3><i class="fa fa-envelope"></i>: {{ user.email }}</h3>
+                                {% if user.phone %}
+                                <h2><i class="fa fa-phone"></i>: {{ user.phone }}</h2>       
+                                {% else %} 
+                                {% endif %}
+                                <h3>Объявление: {{ counts }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="pills-delete">
+                        <div class="my-account-delete account-wrapper">
+                            <h4 class="account-title"> Удалить профиль</h4>
+                            <h4 class="title">Вы уверены что хотите удалить свой профиль?</h4>
+                            <p>После удаления данные пропадут навсегда без возрата</p>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <button class="w-100 btn btn-lg btn-primary" name="delete" type="submit">Удалить</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="pills-update">
+                            <div class="my-update-details account-wrapper">
+                                <h4 class="account-title">Редактировать профиль</h4>
+
+                                <div class="account-details">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="single-form">
+                                                <label class="form-label">Username</label>
+                                                <input type="text" value="{{ user.username }}" name = "username" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-form">
+                                                <label class="form-label">Загрузите новое фото</label>
+                                                <input type="file" class="form-control" name="profile_image" accept="image/">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-form">
+                                                <label class="form-label">First Name</label>
+                                                <input type="text" value="{{ user.first_name }}" name = "first_name" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-form">
+                                                <label class="form-label">Last Name</label>
+                                                <input type="text" value="{{ user.last_name }}" name = "last_name" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-form">
+                                                <label class="form-label">Email address</label>
+                                                <input type="text" value="{{ user.email }}" name = "email" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-form">
+                                                <label class="form-label">Phone</label>
+                                                <input type="text" value="{{ user.phone }}" name = "phone" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="single-form">
+                                                <h5 class="title">Password change</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-form">
+                                                <label class="form-label">New Password</label>
+                                                <input type="password" name="password1" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-form">
+                                                <label class="form-label">Confirm Password</label>
+                                                <input type="password" name="password2" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="single-form">
+                                                <button class="btn btn-primary btn-hover-dark" name="update" type="submit">Save Change</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                    </div>
+
+                    </div>
+                    <!-- Tab content End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="album py-5">
+        <div class="container">
+            <h3 class="account-title" style="text-align: center;">Объявления пользователя {{ user.username }}</h3>
+            <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-xl-3 row-cols-xxl-4 g-4">
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                </div>
+                {% for post in user.post_user.all %}
+                {% if post.valid == True %}
+                <div class="col">
+                    <div class="product-item" style="max-height: 550px;">
+                        <div class="image-block" >
+                            <a href="{% url 'post_detail' post.slug %}">
+                            <img src="{{ post.post_image.url }}" alt="asd" style="max-height: 420px;">
+                        </a>
+                    </div>
+                    <div class="product-desc">
+                        <div class="product-features-reviews">
+                            {% if user.slug %}
+                            <a href="{% url 'profile' user.slug %}" class="features">{{ post.user }}</a>
+                            {% else %}
+                            <a href="{% url 'profile' user.id %}" class="features">{{ post.user }}</a>
+                            {% endif %}
+                            <div class="review-star">
+                                <div class="star" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        {% if post.slug %}
+                        <h4 class="product-name"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h4>
+                        {% else %}
+                        <h4 class="product-name"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h4>
+                        {% endif %}
+                        <div class="product-price">
+                            {% if post.currency != 'Договорная' %}
+                            <span class="sale-price">{{ post.price }} {{ post.currency }}</span>
+                            {% else %}
+                            <span class="sale-price">{{ post.currency }}</span>
+                            {% endif %}
+                            <!-- <span class="old-price">$23.90</span> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+    {% endif%}
+    <!-- Shopping Cart Section End -->
+
+    {% endblock %}
