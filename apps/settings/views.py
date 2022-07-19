@@ -12,4 +12,4 @@ def index(request):
         'posts' : posts,
         'pros' : pros,
     }
-    return render(request, 'index.html', context)
+    return render(request, 'users/index.html', context)
