@@ -4,341 +4,408 @@
 
 
 <!-- Shop Single Section Start -->
-<div class="shop-section section section-padding-02 mt-n10">
-    <div class="container" style="margin-top: 150px;">
-        <!-- Single Blog Item Start -->
-        
-        <!-- Single Blog Item End -->
-        <div class="row gx-10"> 
-            <div class="col-lg-6">
-                <div class="container">
-                <!-- Shop Gallery image Start -->
-                <div class="vertical-slider-wrap">
-                    <div class="swiper-container pd-vertical-slider">
-                        <div class="swiper-wrapper"  style="max-height: 500px;">
-                            <div class="swiper-slide">
-                                <div class="single-img">
-                                    <img src="{{ post.post_image.url }}" alt="Product Image"  style="min-width: 400px; padding: 5px;">
-                                    <div class="inner-stuff">
-                                        <div class="gallery-item">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% for image in post.image_post.all %}
-                            <div class="swiper-slide">
-                                <div class="single-img">
-                                    <img src="{{ image.image.url }}" alt="Product Image" style="min-width: 400px; padding: 5px;">
-                                    <div class="product-action">
-                                    </div>
-                                    <div class="inner-stuff">
-                                        <div class="gallery-item">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
+    <div class="shop-section section-padding">
+        <div class="container">
+            <a href="{% url 'profile' post.user.slug %}" class="username-block" style="margin-top: 20px; text-align: center; margin: 10px;"><h3 style="color: red;">{{ post.user }} </h3></a>
+            <div class="row main" style="padding: 20px;">
+                <div class="vertical-slider-nav swiper-container col-lg-1 col-sm-2">
+                    <div class="swiper-wrapper" style="width: 100px;height: 100px;">
+                        <div class="swiper-slide">
+                            <img src="{{ post.post_image.url }}" alt="Product Thumnail">
                         </div>
-                        {% if request.user.is_authenticated %}
-                            <form method = "POST" style="padding-top: 5px; margin-left: 390px;">
-                                <button class="btn btn-outline-danger" name = "like" type="submit" style="color: rgb(255, 108, 108);"><i class="fa fa-heart"></i></button>
-                                {% csrf_token %}
-                            </form> 
-                        {% endif %}
-                    </div>
-                    <div class="vertical-slider-nav swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="{{ post.post_image.url }}" alt="Product Thumnail">
-                            </div>
-                            {% for image in post.image_post.all %}
-                            <div class="swiper-slide">
-                                <img src="{{ image.image.url }}" alt="aaa">
-                            </div>
-                            {% endfor %}
+                        {% for image in post.image_post.all %}
+                        <div class="swiper-slide"  style="margin-top: -160px;">
+                            <img src="{{ image.image.url }}" alt="aaa">
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
-                <!-- Shop Gallery image End -->
-            </div>
-        </div>
-            <div class="col-lg-6">
-                <!-- Shop Single Start -->
-                <div class="shop-single-content">
-                    <a href="{% url 'profile' post.user.slug %}" class="features"><h3 style="color: red; ">{{ post.user }} </h3></a>
-                    <h3 class="product-name">{{ post.title }}</h3>
-                    <p class="reference">Категория {{ post.category }}</p>
-                    <div class="product-price">
-                        {% if post.currency != 'Договорная' %}
-                        <p class="sale-price">Цена {{ post.price }} {{ post.currency }}</p>
-                        {% else %}
-                        <p class="sale-price">Цена {{ post.currency }}</p>
-                        {% endif %}
-                        <p class="panel-product-actions" >Создано: {{ post.created }}</p>
-                        <p class="panel-product-actions">Понравилось: {{ post.favorite_post.all.count }}</p>
-                        <!-- <span class="old-price">$23.90</span> -->
-                    </div>
-                    {% if request.user == post.user %}
-                    {% if post.valid == True %}
-                            <form method = "POST" style="padding-top: 5px;">
-                            {% csrf_token %}
-                                <button class="btn btn-outline-dark" name = "valid" type="submit" style="width: 210px;"><i class="fa fa-minus"></i> Дективировать</button>
-                            </form>
-                                <a href="{% url 'post_update' post.slug %}" style="padding-top: 5px;"><button  class="btn btn-outline-dark" style="width: 210px;"><i class="icon-repeat"></i>Обновить</button></a> <br>
-                                <a href="{% url 'post_delete' post.slug %}" style="padding-top: 5px;"><button  class="btn btn-outline-dark" style="width: 210px;"><i class="icon-trash"></i>Удалить</button></a>
-                            {% else %}
-                            <form method = "POST">
-                            {% csrf_token %}
-                            <div class="single-form">
-                                <button class="btn btn-outline-success" name = "valid" type="submit" style="width: 210px;"><i class="fa fa-plus"></i> Активировать</button>
-                            </div>
-                        </form>
-                        <a href="{% url 'post_update' post.slug %}" style="padding-top: 5px;"><button  class="btn btn-outline-dark" style="width: 210px;"><i class="icon-repeat"></i> Обновить</button></a><br>
-                        <a href="{% url 'post_delete' post.slug %}" style="padding-top: 5px;" ><button  class="btn btn-outline-dark" style="width: 210px;"><i class="icon-trash"></i>Удалить</button></a>
-                        {% endif %}
-                    {% else %}
-                    <a href="#"><button  class="btn btn-outline-secondary"><i class="fa fa-comment" style="color: rgb(199, 199, 199);"></i> Написать пользователю</button></a>
-                    <a href="tel: {{ post.user.phone }}"><button class="btn btn-outline-primary"><i class="fa fa-phone" style="color: rgb(79, 147, 248);"></i> Позвонить пользователю</button></a>
-                    {% endif %}
-                    <div class="product-description">
-                        <ul>
-                            <li>{{ post.description }}</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="product-additional-info">
-                        <ul class="social-sharing">
-                            <li><a class="facebook" href="shop-single.html#"><i class="fab fa-facebook-square"></i> Поделиться</a></li>
-                            <li><a class="twitter" href="shop-single.html#"><i class="fab fa-twitter"></i> Твитнуть</a></li>
-                            <li><a class="google" href="shop-single.html#"><i class="fab fa-google-plus-g"></i> Гугл+</a></li>
-                            <li><a class="pinterest" href="shop-single.html#"><i class="fab fa-pinterest-square"></i> Пинтерест</li>
-                        </ul>
-                    </div>
-                <!-- Shop Single End -->
-            </div>
-        </div>
-
-        <!-- Shop Tabs Start -->
-        <div class="shop-tab section-padding-02">
-            <ul class="nav justify-content-center">
-                <li><a class="active" data-bs-toggle="tab" href="shop-single.html#tab1">Описание</a></li>
-                <li><a data-bs-toggle="tab" href="shop-single.html#tab2">Информация о продукте</a></li>
-                <li><a data-bs-toggle="tab" href="shop-single.html#tab3">Отзывы</a></li>
-            </ul>
-            <!-- Tab Content Start -->
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="tab1">
-                    <!-- product description Start  -->
-                    <div class="product-description">
-                        <ul>
-                            <li>{{ post.description }}</li>
-                            
-                        </ul>
-                    </div>
-                    <!-- product description End -->
-                </div>
-                <div class="tab-pane fade" id="tab2">
-                    <!-- product details Start  -->
-                    <div class="product-details">
-                        <div class="product-manufacturer">
-                            <a href="shop-single.html#"><img src="assets/images/manu-facturer.jpg" alt=""></a>
-                        </div>
-                        <div class="product-reference">
-                            <p>Reference <span>demo_3</span></p>
-                        </div>
-                        <div class="product-stock">
-                            <p>In stock <span>1200 Items</span></p>
-                        </div>
-                        <div class="product-features">
-                            <p class="date">data-bs sheet</p>
-                            <dl class="data-bs-sheet">
-                                <dt class="name">Compositions</dt>
-                                <dd class="value">Elastane</dd>
-                                <dt class="name">Paper Type</dt>
-                                <dd class="value">Plain</dd>
-                                <dt class="name">Color</dt>
-                                <dd class="value">White</dd>
-                                <dt class="name">Size</dt>
-                                <dd class="value">M</dd>
-                                <dt class="name">Frame Size</dt>
-                                <dd class="value">60x90cm</dd>
-                            </dl>
-                        </div>
-                    </div>
-                    <!-- product details End -->
-                </div>
-                <div class="tab-pane fade" id="tab3">
-                    <!-- product reviews Start  -->
-                    <div class="product-reviews">
-                        <div class="reviews-comment">
-                            <!-- Single Comment Start  -->
-                            <div class="single-comment">
-                                <div class="comment-author">
-                                    <img src="assets/images/author/author-1.png" alt="">
-                                </div>
-                                <div class="comment-content">
-                                    <div class="author-name-rating">
-                                        <h6 class="name">Rosie Silva</h6>
-                                        <div class="review-star">
-                                            <div class="star" style="width: 80%;"></div>
-                                        </div>
+                <div class="swiper-container pd-vertical-slider col-lg-11 col-sm-10">
+                    <div class="swiper-wrapper" style="height: auto;">
+                        <div class="swiper-slide">
+                            <div class="single-img">
+                                <img src="{{ post.post_image.url }}" alt="Product Image"  style="min-width: 400px;padding: 5px;">
+                                <div class="inner-stuff">
+                                    <div class="gallery-item">
                                     </div>
-                                    <span class="date">11/20/2020</span>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse deleniti itaque velit explicabo at eum incidunt vel reprehenderit maxime eos facere ut pariatur voluptas aut, porro quia molestias sequi cupiditate!</p>
-                                </div>
-                            </div>
-                            <!-- Single Comment Start  -->
-                            <!-- Single Comment Start  -->
-                            <div class="single-comment">
-                                <div class="comment-author">
-                                    <img src="assets/images/author/author-2.png" alt="">
-                                </div>
-                                <div class="comment-content">
-                                    <div class="author-name-rating">
-                                        <h6 class="name">Rosie Silva</h6>
-                                        <div class="review-star">
-                                            <div class="star" style="width: 80%;"></div>
-                                        </div>
-                                    </div>
-                                    <span class="date">11/20/2020</span>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse deleniti itaque velit explicabo at eum incidunt vel reprehenderit maxime eos facere ut pariatur voluptas aut, porro quia molestias sequi cupiditate!</p>
-                                </div>
-                            </div>
-                            <!-- Single Comment Start  -->
-                            <!-- Single Comment Start  -->
-                            <div class="single-comment">
-                                <div class="comment-author">
-                                    <img src="assets/images/author/author-3.png" alt="">
-                                </div>
-                                <div class="comment-content">
-                                    <div class="author-name-rating">
-                                        <h6 class="name">Rosie Silva</h6>
-                                        <div class="review-star">
-                                            <div class="star" style="width: 80%;"></div>
-                                        </div>
-                                    </div>
-                                    <span class="date">11/20/2020</span>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse deleniti itaque velit explicabo at eum incidunt vel reprehenderit maxime eos facere ut pariatur voluptas aut, porro quia molestias sequi cupiditate!</p>
-                                </div>
-                            </div>
-                            <!-- Single Comment Start  -->
-                        </div>
-                        <div class="review-form">
-                            <h2 class="form-title">Add a review </h2>
-
-                            <form action="shop-single.html#">
-                                <div class="review-rating">
-                                    <h5 class="title">Review:</h5>
-
-                                    <ul id='stars'>
-                                        <li class='star' title='Poor' data-bs-value='1'>
-                                            <i class='icon-star'></i>
-                                        </li>
-                                        <li class='star' title='Fair' data-bs-value='2'>
-                                            <i class='icon-star'></i>
-                                        </li>
-                                        <li class='star' title='Good' data-bs-value='3'>
-                                            <i class='icon-star'></i>
-                                        </li>
-                                        <li class='star' title='Excellent' data-bs-value='4'>
-                                            <i class='icon-star'></i>
-                                        </li>
-                                        <li class='star' title='WOW!!!' data-bs-value='5'>
-                                            <i class='icon-star'></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="single-form">
-                                            <input type="text" class="form-control" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="single-form">
-                                            <input type="email" class="form-control" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single-form">
-                                            <textarea class="form-control" placeholder="Comment"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single-form">
-                                            <button class="btn btn-primary btn-hover-dark">Post Comment</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="reviewCheck">
-                                    <label class="form-check-label" for="reviewCheck">NOTIFY ME OF NEW POSTS BY EMAIL.</label>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- product reviews End -->
-                </div>
-            </div>
-            <!-- Tab Content End -->
-        </div>
-        <!-- Shop Tabs End -->
-    </div>
-</div>
-<!-- Shop Single Section End -->
-
-<!-- Related Product Start -->
-<div class="section section-padding mt-n6" style="margin-bottom: 350px">
-    <div class="container">
-        <div class="row">
-        <div class="section-title text-center">
-            <h2 class="title">Похожие товары</h2>
-        </div>
-        <div class="product-wrapper product-active mt-n1" >
-            <div class="swiper-container"> 
-                <div class="swiper-wrapper" > 
-                    {% for post in posts %}
-                    {% if post.category_id == post.category_id  and post.slug == post.slug %}
-                    <div class="swiper-slide">
-                        <div class="product-item" style="max-height: 550px;">
-                            <div class="image-block" >
-                                <a href="{% url 'post_detail' post.slug %}">
-                                    <img src="{{ post.post_image.url }}" alt="" style="max-height: 420px;">
-                                </a>
-                            </div>
-                            <div class="product-desc">
-                                <div class="product-features-reviews">
-                                    <a href="{% url 'profile' post.user.slug %}" class="features">{{ post.user }}</a>
-
-                                    <div class="review-star">
-                                        <div class="star" style="width: 100%;"></div>
-                                    </div>
-                                </div>
-                                <h4 class="product-name">
-                                    {% if post.slug %}
-                                                <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
-                                                {% else %}
-                                                <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
-                                                {% endif %}
-                                </h4>
-                                <div class="product-price">
-                                    {% if post.currency != 'Договорная' %}
-                                    <span class="sale-price">{{ post.price }} {{ post.currency }}</span>
-                                    {% else %}
-                                    <span class="sale-price">{{ post.currency }}</span>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>
-                        <!-- Product Item End -->
+                        {% for image in post.image_post.all %}
+                        <div class="swiper-slide">
+                            <div class="single-img">
+                                <img src="{{ image.image.url }}" alt="Product Image" style="min-width: 400px; padding: 5px;">
+                            <div class="product-action">
+                            </div>
+                            <div class="inner-stuff">
+                                <div class="gallery-item">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
+            {% if request.user.is_authenticated %}
+                <form method = "POST" style="padding-top: 5px; text-align: right;">
+                    <button class="btn btn-primary btn-hover-light" name = "like" type="submit"><i class="fa fa-heart"></i></button>
+                    {% csrf_token %}
+                </form> 
+            {% endif %}
         </div>
-        <!-- Product Wrapper End -->
+        <div class="row" style="height: 400px; border-style: double; color: rgba(255, 0, 0, 0.342); margin-bottom: -50px;">
+                {% if request.user == post.user %}
+                    {% if post.valid == True %}
+                            <div style="margin-top: 20px;"  class="col-lg-6 col-sm-6">
+                                <form method = "POST" style="padding-top: 5px; text-align: left;" class="col-lg-6">
+                                {% csrf_token %}
+                                    <button class="btn btn-light btn-hover-dark" name = "valid" type="submit"><i class="fa fa-minus"> Dectivate </i></button>
+                                </form>
+                                <div style="text-align: left; color: white;">
+                                    <h3 style="color: red;">{{ post.title }}</h3>
+                                    <ul>
+                                        <li>{{ post.description }}</li>
+                                    </ul>
+                                    <p>Категория {{ post.category }}</p>
+                                    <p>Создано: {{ post.created }}</p>
+                                    <p>Понравилось: {{ post.favorite_post.all.count }}</p>
+                                    <div class="product-price" style="background-color: red; color: white;border-radius: 15px;width: 200px; text-align: center;">
+                                        {% if post.currency != 'Договорная' %}
+                                        <h5>Цена {{ post.price }} {{ post.currency }}</h5>
+                                        {% else %}
+                                        <h5>Цена {{ post.currency }}</h5>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6" style="text-align: right; padding: 10px; padding-top: 20px;">
+                                    <a href="{% url 'post_update' post.slug %}" style="padding-top: 5px;"><button  class="btn btn-success btn-hover-light"><i class="icon-repeat">Update</i></button></a>
+                                    <a href="{% url 'post_delete' post.slug %}" style="padding-top: 5px;"><button  class="btn btn-primary btn-hover-light"><i class="icon-trash">Delete</i></button></a>
+                                    <ul class="social-sharing" style="padding-top: 20px;">
+                                        <li><a class="facebook" href="shop-single.html#"><i class="fab fa-facebook-square"></i> Поделиться</a></li>
+                                        <li><a class="twitter" href="shop-single.html#"><i class="fab fa-twitter"></i> Твитнуть</a></li>
+                                        <li><a class="google" href="shop-single.html#"><i class="fab fa-google-plus-g"></i> Гугл+</a></li>
+                                    </ul>
+                                </div>
+                        {% else %}
+                        <div style="margin-top: 20px;"  class="col-lg-6 col-sm-6">
+                        <form method = "POST" style="padding-top: 5px; text-align: left;" class="col-lg-6">
+                        {% csrf_token %}
+                            <button class="btn btn-light btn-hover-dark" name = "valid" type="submit"><i class="fa fa-plus">Activate </i></button>
+                        </form>
+                        <div style="text-align: left; color: white;">
+                            <h3 style="color: red;">{{ post.title }}</h3>
+                            <ul>
+                                <li>{{ post.description }}</li>
+                            </ul>
+                            <p>Категория {{ post.category }}</p>
+                            <p>Создано: {{ post.created }}</p>
+                            <p>Понравилось: {{ post.favorite_post.all.count }}</p>
+                            <div class="product-price" style="background-color: red; color: white;border-radius: 15px;width: 200px; text-align: center;">
+                                {% if post.currency != 'Договорная' %}
+                                <h5>Цена {{ post.price }} {{ post.currency }}</h5>
+                                {% else %}
+                                <h5>Цена {{ post.currency }}</h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6" style="text-align: right; padding: 10px; padding-top: 20px;">
+                            <a href="{% url 'post_update' post.slug %}" style="padding-top: 5px;"><button  class="btn btn-success btn-hover-light"><i class="icon-repeat">Update</i></button></a>
+                            <a href="{% url 'post_delete' post.slug %}" style="padding-top: 5px;"><button  class="btn btn-primary btn-hover-light"><i class="icon-trash">Delete</i></button></a>
+                            <ul class="social-sharing" style="padding-top: 20px;">
+                                <li><a class="facebook" href="shop-single.html#"><i class="fab fa-facebook-square"></i> Поделиться</a></li>
+                                <li><a class="twitter" href="shop-single.html#"><i class="fab fa-twitter"></i> Твитнуть</a></li>
+                                <li><a class="google" href="shop-single.html#"><i class="fab fa-google-plus-g"></i> Гугл+</a></li>
+                            </ul>
+                        </div>
+                        {% endif %}
+                        {% else %}
+                        <div style="margin-top: 20px; text-align: left;"  class="col-lg-6 col-sm-6  ">
+                            <a href="#"><button  class="btn btn-secondary btn-hover-dark"><i class="fa fa-comment" style="color: rgb(199, 199, 199);"></i> Написать пользователю</button></a>
+                            <div style="text-align: left; color: white;">
+                                <a href=""><h3 style="color: red;">{{ post.title }}</h3></a>
+                                <ul>
+                                    <li>{{ post.description }}</li>
+                                </ul>
+                                <p>Категория {{ post.category }}</p>
+                                <p>Создано: {{ post.created }}</p>
+                                <p>Понравилось: {{ post.favorite_post.all.count }}</p>
+                                <div class="product-price" style="background-color: red; color: white;border-radius: 15px;width: 200px; text-align: center;">
+                                    {% if post.currency != 'Договорная' %}
+                                    <h5>Цена {{ post.price }} {{ post.currency }}</h5>
+                                    {% else %}
+                                    <h5>Цена {{ post.currency }}</h5>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6" style="text-align: right; padding: 10px; padding-top: 20px;">
+                                <a href="tel: {{ post.user.phone }}"><button class="btn btn-success btn-hover-dark"><i class="fa fa-phone" ></i> Позвонить пользователю</button></a>
+                                <ul class="social-sharing" style="padding-top: 20px;">
+                                    <li><a class="facebook" href="shop-single.html#"><i class="fab fa-facebook-square"></i> Поделиться</a></li>
+                                    <li><a class="twitter" href="shop-single.html#"><i class="fab fa-twitter"></i> Твитнуть</a></li>
+                                    <li><a class="google" href="shop-single.html#"><i class="fab fa-google-plus-g"></i> Гугл+</a></li>
+                                </ul>
+                            </div>
+                        {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Shop Tabs Start -->
+        <div class="shop-tab section-padding-02">
+            <ul class="nav justify-content-center">
+                <li><a data-bs-toggle="tab" href="shop-single.html#tab1" style="color: red;">Описание</a></li>
+                <li><a data-bs-toggle="tab" href="shop-single.html#tab2" style="color: red;">Информация о продукте</a></li>
+                <li><a data-bs-toggle="tab" href="shop-single.html#tab3" style="color: red;">Отзывы</a></li>
+            </ul>
+        </div>
+        <!-- Tab Content Start -->
+        <div class="tab-content" style="margin: 20px;">
+            <div class="tab-pane fade show active" id="tab1">
+                <!-- product description Start  -->
+                <div class="product-description">
+                    <ul style="color: red;">
+                        <li>{{ post.description }}</li>
+                    </ul>
+                </div>
+                <!-- product description End -->
+            </div>
+            <div class="tab-pane fade" id="tab2">
+                <!-- product details Start  -->
+                <div class="product-details" style="color: red;">
+                    <dl class="data-bs-sheet">
+                        <dt class="name">Compositions</dt>
+                        <dd class="value">Elastane</dd>
+                        <dt class="name">Paper Type</dt>
+                        <dd class="value">Plain</dd>
+                        <dt class="name">Color</dt>
+                        <dd class="value">White</dd>
+                        <dt class="name">Size</dt>
+                        <dd class="value">M</dd>
+                        <dt class="name">Frame Size</dt>
+                        <dd class="value">60x90cm</dd>
+                    </dl>
+                </div>
+                <!-- product details End -->
+            </div>
+            <div class="tab-pane fade" id="tab3">
+                <!-- product reviews Start  -->
+                <div class="product-reviews">
+                    <div class="reviews-comment">
+                        <!-- Single Comment Start  -->
+                        <div class="single-comment">
+                            <div class="comment-author">
+                                <img src="assets/images/author/author-1.png" alt="">
+                            </div>
+                            <div class="comment-content">
+                                <div class="author-name-rating">
+                                    <h6 class="name">Rosie Silva</h6>
+                                    <div class="review-star">
+                                        <div class="star" style="width: 80%;"></div>
+                                    </div>
+                                </div>
+                                <span class="date">11/20/2020</span>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse deleniti itaque velit explicabo at eum incidunt vel reprehenderit maxime eos facere ut pariatur voluptas aut, porro quia molestias sequi cupiditate!</p>
+                            </div>
+                        </div>
+                        <!-- Single Comment Start  -->
+                        <!-- Single Comment Start  -->
+                        <div class="single-comment">
+                            <div class="comment-author">
+                                <img src="assets/images/author/author-2.png" alt="">
+                            </div>
+                            <div class="comment-content">
+                                <div class="author-name-rating">
+                                    <h6 class="name">Rosie Silva</h6>
+                                    <div class="review-star">
+                                        <div class="star" style="width: 80%;"></div>
+                                    </div>
+                                </div>
+                                <span class="date">11/20/2020</span>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse deleniti itaque velit explicabo at eum incidunt vel reprehenderit maxime eos facere ut pariatur voluptas aut, porro quia molestias sequi cupiditate!</p>
+                            </div>
+                        </div>
+                        <!-- Single Comment Start  -->
+                        <!-- Single Comment Start  -->
+                        <div class="single-comment">
+                            <div class="comment-author">
+                                <img src="assets/images/author/author-3.png" alt="">
+                            </div>
+                            <div class="comment-content">
+                                <div class="author-name-rating">
+                                    <h6 class="name">Rosie Silva</h6>
+                                    <div class="review-star">
+                                        <div class="star" style="width: 80%;"></div>
+                                    </div>
+                                </div>
+                                <span class="date">11/20/2020</span>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse deleniti itaque velit explicabo at eum incidunt vel reprehenderit maxime eos facere ut pariatur voluptas aut, porro quia molestias sequi cupiditate!</p>
+                            </div>
+                        </div>
+                        <!-- Single Comment Start  -->
+                    </div>
+                    <div class="review-form">
+                        <h2 class="form-title">Add a review </h2>
+
+                        <form action="shop-single.html#">
+                            <div class="review-rating">
+                                <h5 class="title">Review:</h5>
+
+                                <ul id='stars'>
+                                    <li class='star' title='Poor' data-bs-value='1'>
+                                        <i class='icon-star'></i>
+                                    </li>
+                                    <li class='star' title='Fair' data-bs-value='2'>
+                                        <i class='icon-star'></i>
+                                    </li>
+                                    <li class='star' title='Good' data-bs-value='3'>
+                                        <i class='icon-star'></i>
+                                    </li>
+                                    <li class='star' title='Excellent' data-bs-value='4'>
+                                        <i class='icon-star'></i>
+                                    </li>
+                                    <li class='star' title='WOW!!!' data-bs-value='5'>
+                                        <i class='icon-star'></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="single-form">
+                                        <input type="text" class="form-control" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="single-form">
+                                        <input type="email" class="form-control" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single-form">
+                                        <textarea class="form-control" placeholder="Comment"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single-form">
+                                        <button class="btn btn-primary btn-hover-dark">Post Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="reviewCheck">
+                                <label class="form-check-label" for="reviewCheck">NOTIFY ME OF NEW POSTS BY EMAIL.</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tab Content End --> 
+    </div>
     </div>
 </div>
-
-    {% endblock %}
+<!-- Shop Single Section End -->
+<div class="section section-padding">
+    <div class="container">
+        <h1 style="text-align: center; color: red;margin-top: -50px; margin-bottom: 50px; background-color: rgba(82, 82, 82, 0.582);">Похожие товары</h1>
+        <div class="row">
+            {% for post1 in posts %}
+            {% if post.category == post1.category and post.slug != post1.slug%}
+            <div class="main col-lg-3 col-sm-6 col-md-12">
+                <style>
+                    .main{
+                        color: rgba(255, 0, 0, 0.342);
+                        height: auto;
+                        min-height: 500px;
+                        background-color: #7efd0000;
+                        text-align: center;
+                        border-style: double; 
+                        position: relative;
+                        }
+                    .panel-product-actions{
+                        color: white;
+                    }
+                    .image-block{
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                    }
+                    .username-block{
+                        color: rgb(255, 0, 0);
+                        background-color: rgba(82, 82, 82, 0.582); 
+                        border-radius: 20px; 
+                        padding-left: 10px; 
+                        padding-right: 10px; 
+                        width: 100%; 
+                        padding-top: 5px;
+                        margin-top: -20px;
+                    }
+                    .product-price-1{
+                        background-color: rgb(255, 0, 0);
+                        border-radius: 20px;
+                        width: 90%;
+                        color: white; 
+                        margin: 0 auto;
+                        bottom: 0;
+                    }
+                    .product-desc {
+                        padding: 5px;
+                        color: red;
+                        margin: 5px;
+                        border-radius: 10px;
+                        position: absolute;
+                        width: 95%;
+                        background-color: rgba(82, 82, 82, 0.582); 
+                        bottom: 0;
+                        margin-left: -4px;
+                    }
+                </style>
+                    <div class="single-blog-item" style="max-height: 550px;">
+                        <div class="username-block">
+                        <a href="{% url 'profile' post1.user.slug %}"><h3>{{ post1.user }} </h3></a>
+                        </div>
+                        <div class="image-block" >
+                            <a href="{% url 'post_detail' post1.slug %}">
+                                <img src="{{ post1.post_image.url }}" alt="asd" style="max-height: 420px;">
+                            </a>
+                        </div>
+                        <div class="product-desc">
+                            <h4 class="product-name"><a href="{% url 'post_detail' post1.slug %}">{{ post1.title | truncatewords:3 }}</a></h4>
+                            <h6 style="color: white;">{{ post1.description | truncatewords:15 }}</h6>
+                            <div class="product-price-1">
+                                {% if post1.currency != 'Договорная' %}
+                                <h4>{{ post1.price }} {{ post.currency }}</h5>
+                                {% else %}
+                                <h5>{{ post1.currency }}</h5>
+                                {% endif %}
+                                <!-- <span class="old-price">$23.90</span> -->
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            {% endif %}
+            {% endfor %}    
+            <div class="col-lg-3 col-sm-6 col-md-12">
+                <!-- Single Blog Item Start -->
+                <div class="main" style="padding: 10px; margin-left: -12px;">
+                    <div class="blog-embed">
+                        <h4 class="username-block" style="margin-top: 0px;">This is Secound Post For XipBlog</h4>
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/hHqW0gtiMy4" title="YouTube video" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="product-desc">
+                        <div class="blog-meta">
+                            <p class="meta-author">Posted by <a href="blog-grid.html#">HasThemes</a></p>
+                            <p class="meta-date">Aug 26TH, 2020</p>
+                        </div>
+                        <p style="color: white;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when ...</p>
+                    </div>
+                </div>
+                <!-- Single Blog Item End -->
+            </div>
+        </div>
+    </div>
+</div>  
+{% endblock %}

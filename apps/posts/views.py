@@ -142,8 +142,8 @@ def post_search(request):
     return render(request, 'posts/search.html', context)
 
 def post_detail(request, slug):
-    posts = Post.objects.all()
     post = Post.objects.get(slug = slug)
+    posts = Post.objects.all()
     images = PostImage.objects.all()
     setting = Setting.objects.latest('id')
     random_posts = Post.objects.all().order_by('?')
@@ -170,6 +170,6 @@ def post_detail(request, slug):
         'post' : post,
         'posts' : posts,
         'random_posts' : random_posts,
-        'images' : images
+        'images' : images,
     }
     return render(request, 'posts/single.html', context)
