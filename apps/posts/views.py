@@ -4,68 +4,6 @@ from apps.categories.models import Category
 from apps.posts.models import Post, PostImage, FavoritePost
 from apps.settings.models import Setting
 from django.db.models import Q
-# def post_detail(request, id):
-#     post = Post.objects.get(id = id)
-#     posts = Post.objects.all().order_by('?')
-#     setting = Setting.objects.latest('id')
-#     post1 = PostImage.objects.all()
-#     if request.method == "POST":
-#         post = Post.objects.get(id = id)
-#         if post.valid == True:
-#             post.valid = False 
-#             post.save()
-#         if post.valid == False:
-#             post.valid = True 
-#             post.save()
-#         return redirect('profile', request.user.id)
-#     context = {
-#         'setting' : setting,
-#         'post' : post,
-#         'posts' : posts,
-#         'post1' : post1,
-#     }
-#     return render(request, 'posts/single.html', context)
-
-
-# def post_delete(request, id):
-#     setting = Setting.objects.latest('id')
-#     post = Post.objects.get(id = id)
-#     if request.method == 'POST':
-#         post = Post.objects.get(id = id)
-#         post.delete()
-#         return redirect('index')
-#     context = {
-#         'setting' : setting,
-#         'post' : post,
-#     }
-#     return render(request, 'posts/post_delete.html', context)
-
-# def post_update(request, id):
-#     setting = Setting.objects.latest('id')
-#     categories = Category.objects.all()
-#     post = Post.objects.get(id = id)
-#     if request.method == 'POST':
-#         title = request.POST.get('title')
-#         description = request.POST.get('description')
-#         post_image = request.FILES.get('post_image')
-#         price = request.POST.get('price')
-#         category = request.POST.get('category')
-#         currency = request.POST.get('currency')
-#         post = Post.objects.get(id = id)
-#         post.title = title
-#         post.description = description
-#         post.post_image = post_image
-#         post.category_id = category
-#         post.currency = currency
-#         post.price = price
-#         post.save()
-#         return redirect('post_detail', post.id)
-#     context = {
-#         'setting' : setting,
-#         'categories' : categories,
-#         'post' : post,
-#     }
-#     return render(request, 'posts/post_update.html', context)
 
 def post_update(request, slug):
     setting = Setting.objects.latest('id')

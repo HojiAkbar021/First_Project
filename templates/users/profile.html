@@ -2,14 +2,8 @@
 {% load static %}
 {% block content %}
 
-<<<<<<< HEAD
 {% if request.user.is_authenticated and request.user == user %}
     <div class="section section-padding mt-n6">
-=======
-    <!-- Shopping Cart Section Start -->
-    {% if request.user.is_authenticated and request.user == user %}
-    <div class="section section-padding mt-n6" style="margin-bottom: 550px">
->>>>>>> 829bca4fded6ea1a22f0208dc053d5e87d3ef1ff
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-md-4">
@@ -52,22 +46,15 @@
                         <style>
                             .account-title-01{
                                 margin: 10px;
-<<<<<<< HEAD
                                 color: white;
                                 background-color: red;
                             }
                             .album {
                                 background-color: rgb(252, 252, 252);
-=======
-                                color: red;
-                                border-radius: 15px;
-                                background-color: rgba(82, 82, 82, 0.582);
->>>>>>> 829bca4fded6ea1a22f0208dc053d5e87d3ef1ff
                             }
                             .singl-form{
                                 color: black;
                             }
-<<<<<<< HEAD
                             .product-price {
                                 background-color: red;
                                 color: white;
@@ -83,8 +70,6 @@
                             .image-block {
                                 max-height: 220px;
                             }
-=======
->>>>>>> 829bca4fded6ea1a22f0208dc053d5e87d3ef1ff
                         </style>
 
                     <div class="tab-pane fade show active" id="pills-activ">
@@ -283,17 +268,10 @@
                         <h4 class="account-title-01">Мои данные</h4>
                         <div class="my-account-profile account-wrapper">
                             <div class="row" style="text-decoration:underline; text-align: left;" >
-<<<<<<< HEAD
                                 <div class="col-lg-4">
                                 <img src="{{ user.profile_image.url }}" alt="" style="border-radius:20%;margin: 20px; width: 90%;">
                                 </div>
                                 <div class="col-lg-7" style="margin: 20px; margin-top: 20px; text-align: center;">
-=======
-                                <div class="col-lg-6">
-                                <img src="{{ user.profile_image.url }}" alt="" style="border-radius:20%;margin: 20px; width: 90%;">
-                                </div>
-                                <div class="col-lg-5" style="margin: 20px; margin-top: 60px;">
->>>>>>> 829bca4fded6ea1a22f0208dc053d5e87d3ef1ff
                                 <h3><i class="fa fa-user"></i>: {{ user.last_name }} {{ user.first_name }}</h2>
                                 <h4><i class="fa fa-envelope"></i>: {{ user.email }}</h4>
                                 {% if user.phone %}

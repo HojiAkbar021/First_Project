@@ -4,103 +4,66 @@
 
 
 <!-- Shop Single Section Start -->
-<<<<<<< HEAD
 <div class="shop-section section section-padding-02 mt-n10">
     <div class="container">
         <!-- Single Blog Item Start -->
         
         <!-- Single Blog Item End -->
         <div class="row gx-10"> 
-            <div class="col-lg-6">
-                <div class="container">
-                <!-- Shop Gallery image Start -->
+            <div class="col-lg-6" style="border-style: double; color: rgb(255, 0, 0);height: 700px;">
                 <div class="vertical-slider-wrap">
-                    <div class="swiper-container pd-vertical-slider">
-                        <div class="swiper-wrapper"  style="max-height: 500px;">
+                    <div class="swiper-container pd-vertical-slider" style="max-height: 550px;">
+                        <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <div class="single-img">
-                                    <img src="{{ post.post_image.url }}" alt="Product Image"  style="min-width: 400px; padding: 5px;">
+                                <div class="single-img zoom">
+                                    <img src="{{ post.post_image.url }}" alt="Product Image">
                                     <div class="inner-stuff">
-                                        <div class="gallery-item">
+                                        <div class="gallery-item" data-bs-src="assets/images/shop-single/shop-single-01.jpg">
+                                            <a href="javascript:void(0)">
+                                                <i class="lastudioicon-full-screen"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {% for image in post.image_post.all %}
                             <div class="swiper-slide">
-                                <div class="single-img">
-                                    <img src="{{ image.image.url }}" alt="Product Image" style="min-width: 400px; padding: 5px;">
-                                    <div class="product-action">
-                                    </div>
+                                <div class="single-img zoom">
+                                    <img src="{{ image.image.url }}" alt="slid">
                                     <div class="inner-stuff">
-                                        <div class="gallery-item">
+                                        <div class="gallery-item" data-bs-src="assets/images/shop-single/shop-single-02.jpg">
+                                            <a href="javascript:void(0)">
+                                                <i class="lastudioicon-full-screen"></i>
+                                            </a>
                                         </div>
-=======
-    <div class="shop-section section-padding">
-        <div class="container">
-            <a href="{% url 'profile' post.user.slug %}" class="username-block" style="margin-top: 20px; text-align: center; margin: 10px;"><h3 style="color: red;">{{ post.user }} </h3></a>
-            <div class="row main" style="padding: 20px;">
-                <div class="vertical-slider-nav swiper-container col-lg-1 col-sm-2">
-                    <div class="swiper-wrapper" style="width: 100px;height: 100px;">
-                        <div class="swiper-slide">
-                            <img src="{{ post.post_image.url }}" alt="Product Thumnail">
-                        </div>
-                        {% for image in post.image_post.all %}
-                        <div class="swiper-slide"  style="margin-top: -160px;">
-                            <img src="{{ image.image.url }}" alt="aaa">
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="swiper-container pd-vertical-slider col-lg-11 col-sm-10">
-                    <div class="swiper-wrapper" style="height: auto;">
-                        <div class="swiper-slide">
-                            <div class="single-img">
-                                <img src="{{ post.post_image.url }}" alt="Product Image"  style="min-width: 400px;padding: 5px;">
-                                <div class="inner-stuff">
-                                    <div class="gallery-item">
->>>>>>> 829bca4fded6ea1a22f0208dc053d5e87d3ef1ff
                                     </div>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
-<<<<<<< HEAD
-                        {% if request.user.is_authenticated %}
-                            <form method = "POST" style="padding-top: 5px; margin-left: 390px;">
-                                <button class="btn btn-outline-danger" name = "like" type="submit" style="color: rgb(255, 108, 108);"><i class="fa fa-heart"></i></button>
-                                {% csrf_token %}
-                            </form> 
-                        {% endif %}
+                        <a href="shop-single.html#gallery-1" class="btn-gallery"><i class="far fa-expand"></i></a>
                     </div>
-                    <div class="vertical-slider-nav swiper-container">
+                    <div class="vertical-slider-nav swiper-container" style="max-height: 620px;">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="{{ post.post_image.url }}" alt="bbbb">
-=======
-                        {% for image in post.image_post.all %}
-                        <div class="swiper-slide">
-                            <div class="single-img">
-                                <img src="{{ image.image.url }}" alt="Product Image" style="min-width: 400px; padding: 5px;">
-                            <div class="product-action">
->>>>>>> 829bca4fded6ea1a22f0208dc053d5e87d3ef1ff
+                                <img src="{{ post.post_image.url }}" alt="Product Thumnail">
                             </div>
-                            <div class="inner-stuff">
-                                <div class="gallery-item">
-                                </div>
+                            {% for image in post.image_post.all %}
+                            <div class="swiper-slide">
+                                <img src="{{ image.image.url }}" alt="Product Thumnail">
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
             {% if request.user.is_authenticated %}
-                <form method = "POST" style="padding-top: 5px; text-align: right;">
+                <form method = "POST" style="padding-top: 5px; text-align: right;margin-top: -60px;">
                     <button class="btn btn-primary btn-hover-light" name = "like" type="submit"><i class="fa fa-heart"></i></button>
                     {% csrf_token %}
                 </form> 
             {% endif %}
         </div>
-        <div class="row" style="height: 400px; border-style: double; color: rgba(255, 0, 0, 0.342); margin-bottom: -50px;">
+                <div class="row col-lg-6" style="border-style: double; color: rgb(255, 255, 255); margin-left: 0;">
                 {% if request.user == post.user %}
                     {% if post.valid == True %}
                             <div style="margin-top: 20px;"  class="col-lg-6 col-sm-6">
@@ -109,9 +72,9 @@
                                     <button class="btn btn-light btn-hover-dark" name = "valid" type="submit"><i class="fa fa-minus"> Dectivate </i></button>
                                 </form>
                                 <div style="text-align: left; color: white;">
-                                    <h3 style="color: red;">{{ post.title }}</h3>
+                                    <h3 style="color: red;">{{ post.title | truncatewords:2 }}</h3>
                                     <ul>
-                                        <li>{{ post.description }}</li>
+                                        <li>{{ post.description | truncatewords:10 }}</li>
                                     </ul>
                                     <p>Категория {{ post.category }}</p>
                                     <p>Создано: {{ post.created }}</p>
@@ -141,9 +104,9 @@
                             <button class="btn btn-light btn-hover-dark" name = "valid" type="submit"><i class="fa fa-plus">Activate </i></button>
                         </form>
                         <div style="text-align: left; color: white;">
-                            <h3 style="color: red;">{{ post.title }}</h3>
+                            <h3 style="color: red;">{{ post.title | truncatewords:2 }}</h3>
                             <ul>
-                                <li>{{ post.description }}</li>
+                                <li>{{ post.description | truncatewords:10 }}</li>
                             </ul>
                             <p>Категория {{ post.category }}</p>
                             <p>Создано: {{ post.created }}</p>
@@ -167,13 +130,13 @@
                             </ul>
                         </div>
                         {% endif %}
-                        {% else %}
-                        <div style="margin-top: 20px; text-align: left;"  class="col-lg-6 col-sm-6  ">
-                            <a href="#"><button  class="btn btn-secondary btn-hover-dark"><i class="fa fa-comment" style="color: rgb(199, 199, 199);"></i> Написать пользователю</button></a>
+                        {% else %} 
+                        <div style="margin-top: 20px; text-align: left;"  class="col-lg-6 col-sm-6">
+                            <a href="#"><button  class="btn btn-secondary btn-hover-dark"><i class="fa fa-comment" style="color: rgb(199, 199, 199);"></i> Написать</button></a>
                             <div style="text-align: left; color: white;">
-                                <a href=""><h3 style="color: red;">{{ post.title }}</h3></a>
+                                <a href=""><h3 style="color: red;">{{ post.title | truncatewords:2 }}</h3></a>
                                 <ul>
-                                    <li>{{ post.description }}</li>
+                                    <li>{{ post.description | truncatewords:10 }}</li>
                                 </ul>
                                 <p>Категория {{ post.category }}</p>
                                 <p>Создано: {{ post.created }}</p>
@@ -185,10 +148,10 @@
                                     <h5>Цена {{ post.currency }}</h5>
                                     {% endif %}
                                 </div>
-                            </div>
-                            </div>
+                            </div> 
+                        </div>
                             <div class="col-lg-6 col-sm-6" style="text-align: right; padding: 10px; padding-top: 20px;">
-                                <a href="tel: {{ post.user.phone }}"><button class="btn btn-success btn-hover-dark"><i class="fa fa-phone" ></i> Позвонить пользователю</button></a>
+                                <a href="tel: {{ post.user.phone }}"><button class="btn btn-success btn-hover-dark"><i class="fa fa-phone" ></i> Позвонить</button></a>
                                 <ul class="social-sharing" style="padding-top: 20px;">
                                     <li><a class="facebook" href="shop-single.html#"><i class="fab fa-facebook-square"></i> Поделиться</a></li>
                                     <li><a class="twitter" href="shop-single.html#"><i class="fab fa-twitter"></i> Твитнуть</a></li>
@@ -196,10 +159,10 @@
                                 </ul>
                             </div>
                         {% endif %}
-            </div>
+                </div>
         </div>
     </div>
-    <div class="container">
+                <div class="container">
         <!-- Shop Tabs Start -->
         <div class="shop-tab section-padding-02">
             <ul class="nav justify-content-center">
@@ -350,18 +313,14 @@
             </div>
         </div>
         <!-- Tab Content End --> 
+                </div>
     </div>
-    </div>
-</div>
-<!-- Shop Single Section End -->
+
+
 <div class="section section-padding">
     <div class="container">
-        <h1 style="text-align: center; color: red;margin-top: -50px; margin-bottom: 50px; background-color: rgba(82, 82, 82, 0.582);">Похожие товары</h1>
         <div class="row">
-<<<<<<< HEAD
-        <div class="">
-            <h2 class="title" style="text-align: center;">Похожие товары</h2>
-        </div>
+        <h1 style="text-align: center; color: red;margin-top: -50px; margin-bottom: 50px; background-color: rgba(82, 82, 82, 0.582);">Похожие товары</h1>
         <div class="product-wrapper product-active mt-n1" >
             <div class="swiper-container"> 
                 <div class="swiper-wrapper" > 
@@ -413,132 +372,36 @@
                                 bottom: 0;
                             }
                         </style>
-                            <div class="single-blog-item" style="max-height: 550px;">
-                                <div class="username-block">
-                                <a href="{% url 'profile' post1.user.slug %}"><h3>{{ post1.user }} </h3></a>
-                                </div>
-                                <div class="image-block" >
-                                    <a href="{% url 'post_detail' post1.slug %}">
-                                        <img src="{{ post1.post_image.url }}" alt="asd" style="max-height: 420px;">
-                                    </a>
-                                </div>
-                                <div class="product-desc">
-                                    <h4 class="product-name"><a href="{% url 'post_detail' post.slug %}">{{ post1.title | truncatewords:3 }}</a></h4>
-                                    <h6 style="color: white;">{{ post1.description | truncatewords:15 }}</h6>
-                                    <div class="product-price-1">
-                                        {% if post1.currency != 'Договорная' %}
-                                        <h4>{{ post1.price }} {{ post.currency }}</h5>
-                                        {% else %}
-                                        <h5>{{ post1.currency }}</h5>
-                                        {% endif %}
-                                        <!-- <span class="old-price">$23.90</span> -->
-                                    </div>
+                        <div class="single-blog-item" style="max-height: 550px;">
+                            <div class="username-block">
+                            <a href="{% url 'profile' post1.user.slug %}"><h3>{{ post1.user }} </h3></a>
+                            </div>
+                            <div class="image-block" >
+                                <a href="{% url 'post_detail' post1.slug %}">
+                                    <img src="{{ post1.post_image.url }}" alt="asd" style="max-height: 420px;">
+                                </a>
+                            </div>
+                            <div class="product-desc">
+                                <h4 class="product-name"><a href="{% url 'post_detail' post.slug %}">{{ post1.title | truncatewords:3 }}</a></h4>
+                                <h6 style="color: white;">{{ post1.description | truncatewords:15 }}</h6>
+                                <div class="product-price-1">
+                                    {% if post1.currency != 'Договорная' %}
+                                    <h4>{{ post1.price }} {{ post.currency }}</h5>
+                                    {% else %}
+                                    <h5>{{ post1.currency }}</h5>
+                                    {% endif %}
+                                    <!-- <span class="old-price">$23.90</span> -->
                                 </div>
                             </div>
-=======
-            {% for post1 in posts %}
-            {% if post.category == post1.category and post.slug != post1.slug%}
-            <div class="main col-lg-3 col-sm-6 col-md-12">
-                <style>
-                    .main{
-                        color: rgba(255, 0, 0, 0.342);
-                        height: auto;
-                        min-height: 500px;
-                        background-color: #7efd0000;
-                        text-align: center;
-                        border-style: double; 
-                        position: relative;
-                        }
-                    .panel-product-actions{
-                        color: white;
-                    }
-                    .image-block{
-                        padding-top: 10px;
-                        padding-bottom: 10px;
-                    }
-                    .username-block{
-                        color: rgb(255, 0, 0);
-                        background-color: rgba(82, 82, 82, 0.582); 
-                        border-radius: 20px; 
-                        padding-left: 10px; 
-                        padding-right: 10px; 
-                        width: 100%; 
-                        padding-top: 5px;
-                        margin-top: -20px;
-                    }
-                    .product-price-1{
-                        background-color: rgb(255, 0, 0);
-                        border-radius: 20px;
-                        width: 90%;
-                        color: white; 
-                        margin: 0 auto;
-                        bottom: 0;
-                    }
-                    .product-desc {
-                        padding: 5px;
-                        color: red;
-                        margin: 5px;
-                        border-radius: 10px;
-                        position: absolute;
-                        width: 95%;
-                        background-color: rgba(82, 82, 82, 0.582); 
-                        bottom: 0;
-                        margin-left: -4px;
-                    }
-                </style>
-                    <div class="single-blog-item" style="max-height: 550px;">
-                        <div class="username-block">
-                        <a href="{% url 'profile' post1.user.slug %}"><h3>{{ post1.user }} </h3></a>
-                        </div>
-                        <div class="image-block" >
-                            <a href="{% url 'post_detail' post1.slug %}">
-                                <img src="{{ post1.post_image.url }}" alt="asd" style="max-height: 420px;">
-                            </a>
-                        </div>
-                        <div class="product-desc">
-                            <h4 class="product-name"><a href="{% url 'post_detail' post1.slug %}">{{ post1.title | truncatewords:3 }}</a></h4>
-                            <h6 style="color: white;">{{ post1.description | truncatewords:15 }}</h6>
-                            <div class="product-price-1">
-                                {% if post1.currency != 'Договорная' %}
-                                <h4>{{ post1.price }} {{ post.currency }}</h5>
-                                {% else %}
-                                <h5>{{ post1.currency }}</h5>
-                                {% endif %}
-                                <!-- <span class="old-price">$23.90</span> -->
-                            </div>
-                        </div>
->>>>>>> 829bca4fded6ea1a22f0208dc053d5e87d3ef1ff
-                    </div>
-            </div>
-            {% endif %}
-            {% endfor %}    
-            <div class="col-lg-3 col-sm-6 col-md-12">
-                <!-- Single Blog Item Start -->
-                <div class="main" style="padding: 10px; margin-left: -12px;">
-                    <div class="blog-embed">
-                        <h4 class="username-block" style="margin-top: 0px;">This is Secound Post For XipBlog</h4>
-                        <div class="ratio ratio-16x9">
-                            <iframe src="https://www.youtube.com/embed/hHqW0gtiMy4" title="YouTube video" allowfullscreen></iframe>
                         </div>
                     </div>
-                    <div class="product-desc">
-                        <div class="blog-meta">
-                            <p class="meta-author">Posted by <a href="blog-grid.html#">HasThemes</a></p>
-                            <p class="meta-date">Aug 26TH, 2020</p>
-                        </div>
-                        <p style="color: white;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when ...</p>
-                    </div>
+                    {% endif %}
+                    {% endfor %}    
                 </div>
-                <!-- Single Blog Item End -->
             </div>
         </div>
+        </div>
     </div>
-<<<<<<< HEAD
-</div>
 </div>
 
     {% endblock %}
-=======
-</div>  
-{% endblock %}
->>>>>>> 829bca4fded6ea1a22f0208dc053d5e87d3ef1ff
