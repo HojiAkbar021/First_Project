@@ -170,7 +170,7 @@
 </head>
 <div class="section" style="background-image: url(../../media/logo/pngtree-blue-carbon-background-with-sport-style-and-golden-light-image_371487.jpg); background-repeat:no-repeat; background-size: 100% 100%;">
     <!-- Header top Start -->
-    <div class="container" style="margin-bottom: -50px; margin-top: 50px;">
+    <div class="container" style="margin-bottom: -80px; margin-top: 50px;">
         <div class="header-top">
                 <div class="row">
                     <div class="col-lg-4">
@@ -178,7 +178,8 @@
                     <div class="col-lg-4">
                         <!-- Header Logo Start -->
                         <div class="header-logo text-center">
-                            <a href="{% url 'index' %}"><img src="{{ setting.logo.url }}" width="30%" alt="" style="border-radius: 10%;"></a>
+                            <h3 style="color: red;">{{ setting.title }}</h3w>
+                            <a href="{% url 'index' %}"><img src="{{ setting.logo.url }}" width="25%" alt="" style="border-radius: 10%;"></a>
                         </div>
                         <!-- Header Logo End -->
                     </div>
@@ -231,7 +232,7 @@
     
     {% endblock %}
 <!-- footer Start -->
-<div class="section footer-bg" id="footer" style="margin-bottom: -600px;">
+<div class="section footer-bg" id="footer" style="position: relative;bottom: 0;">
     <!-- Footer Widget Section Start -->
     <div class="footer-widget-section section-padding">
         <div class="container">
@@ -242,9 +243,8 @@
 
                         <!-- footer Widget Start -->
                         <div class="footer-widget">
-                            <a href="index.html#"><img src="assets/images/logo-white.png" alt=""></a>
                             <div class="footer-widget-text">
-                                <p class="desc">{{ setting.description }}</p>
+                                <h7 class="desc"><img src="{{setting.logo.url}}" style="width: 100px; margin-top: 10px; padding-right: 12px;" align="left" alt="" >{{ setting.description }}</h7>
                                 <p><strong>Адрес :</strong> {{ setting.address }}</p>
                                 <p><strong>Телефонный номер :</strong>{{ setting.phone }}</p>
                                 <p><strong>Почта :</strong>{{ setting.email }}</p>
@@ -256,8 +256,8 @@
                     <div class="col-lg-2 col-sm-6">
 
                         <!-- footer Widget Start -->
+                        <h3 class="footer-widget-title">Information</h3>
                         <div class="footer-widget">
-                            <h3 class="footer-widget-title">Information</h3>
 
                             <ul class="widget-link">
                                 <li><a href="index.html#">Delivery</a></li>
