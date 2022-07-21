@@ -72,37 +72,25 @@ def post_update(request, slug):
     categories = Category.objects.all()
     post = Post.objects.get(slug = slug)
     if request.method == 'POST':
-        if currency == 'Договорная':
-            currency = request.POST.get('currency')
-            title = request.POST.get('title')
-            description = request.POST.get('description')
-            post_image = request.FILES.get('post_image')
-            category = request.POST.get('category')
-            post = Post.objects.get(slug = slug)
-            post.title = title
-            post.description = description
-            post.post_image = post_image
-            post.category_id = category
-            post.currency = currency
-            post.price = 0
-            post.slug = title
-            post.save()
-        else:
-            currency = request.POST.get('currency')
-            title = request.POST.get('title')
-            description = request.POST.get('description')
-            post_image = request.FILES.get('post_image')
-            price = request.POST.get('price')
-            category = request.POST.get('category')
-            post = Post.objects.get(slug = slug)
-            post.title = title
-            post.description = description
-            post.post_image = post_image
-            post.category_id = category
-            post.currency = currency
-            post.price = price
-            post.slug = title
-            post.save()
+        currency = request.POST.get('currency')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        post_image = request.FILES.get('post_image')
+        price = request.POST.get('price')
+        category = request.POST.get('category')
+        post_images = request.FILES.getlist('post_images')
+        for p_image in post_images:
+            PostImage.objects.create(post_id = post.id, image = p_image)
+        post = Post.objects.get(slug = slug)
+        post.title = title
+        post.description = description
+        post.post_image = post_image
+        post.category_id = category
+        post.currency = currency
+        post.price = price
+        post.slug = title
+        post.post_images = post_images
+        post.save()
         return redirect('post_detail', post.slug)
     context = {
         'setting' : setting,
@@ -118,7 +106,7 @@ def post_delete(request, slug):
     if request.method == 'POST':
         post = Post.objects.get(slug = slug)
         post.delete()
-        return redirect('index')
+        return redirect('profile', request.user.slug)
     context = {
         'setting' : setting,
         'post' : post,
