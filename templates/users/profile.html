@@ -269,11 +269,7 @@
                         <div class="my-account-profile account-wrapper">
                             <div class="row" style="text-decoration:underline; text-align: left;" >
                                 <div class="col-lg-4">
-                                {% if user.profile_image %}
                                 <img src="{{ user.profile_image.url }}" alt="" style="border-radius:20%;margin: 20px; width: 90%;">
-                                {% else %}
-                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" style="border-radius:20%;margin: 20px; width: 90%;">
-                                {% endif %}
                                 </div>
                                 <div class="col-lg-7" style="margin: 20px; margin-top: 20px; text-align: center;">
                                 <h3><i class="fa fa-user"></i>: {{ user.last_name }} {{ user.first_name }}</h2>
