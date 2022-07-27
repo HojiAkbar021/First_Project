@@ -1,4 +1,7 @@
 from django.contrib import admin
-from .models import Setting
+from apps.settings.models import Setting, AboutUs, Contact, Blog
 
 admin.site.register(Setting)
+admin.site.register(AboutUs)
+admin.site.register(Contact)
+admin.site.register(Blog)

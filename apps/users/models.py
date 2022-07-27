@@ -21,3 +21,24 @@ def slag_pre_save_receiver(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(slag_pre_save_receiver, sender=User)
+
+class UserComment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="from_user", verbose_name="От пользователя")
+    comment_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comment_for_user", verbose_name="К пользователю")
+    rating = models.PositiveBigIntegerField(default=0, verbose_name="Ретинг")
+    title = models.TextField(max_length=100)
+    text = models.TextField(verbose_name="Текст")
+    created = models.DateTimeField(auto_now_add=True)
+    STATUS_COMMENT = (
+        ('В ожидании', 'В ожидании'),
+        ('Не принята', 'Не принята'),
+        ('Принята', 'Принята'),
+    )
+    status_comment = models.CharField(choices=STATUS_COMMENT, max_length=30, verbose_name="Статус комментария", default="В ожидании")
+
+    def __str__(self):
+        return f"{self.text}"
+
+    class Meta:
+        verbose_name = "Комментарий пользователю"
+        verbose_name_plural = "Комментарии пользователям"

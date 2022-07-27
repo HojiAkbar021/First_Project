@@ -1,0 +1,127 @@
+{% extends 'include/homepage.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    <style>
+        .title1 {
+            color: red;
+        }
+    </style>
+
+<!-- Page Banner Start -->
+<div class="page-section section" style="padding-top: 50px;">
+        <div class="text-center">
+            <h2 class="title1">Контакты</h2>
+        </div>
+</div>
+<!-- Page Banner End -->
+
+<!-- Contact Section Start -->
+<div class="section section-padding mt-n6">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Single Contact Info Start -->
+                        <div class="single-contact-info">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt" style="color: red;"></i>
+                            </div>
+                            <div class="info-content">
+                                <h5 class="title">Адрес</h5>
+                                <p>{{ setting.address }}</p>
+                            </div>
+                        </div>
+                        <!-- Single Contact Info End -->
+                    </div>
+                    <div class="col-md-4">
+                        <!-- Single Contact Info Start -->
+                        <div class="single-contact-info">
+                            <div class="info-icon">
+                                <i class="fas fa-phone" style="color: red;"></i>
+                            </div>
+                            <div class="info-content">
+                                <h5 class="title">Телефонный номер</h5>
+                                <p><a href="tel:{{ setting.phone }}">{{ setting.phone }}</a></p>
+                            </div>
+                        </div>
+                        <!-- Single Contact Info End -->
+                    </div>
+                    <div class="col-md-4">
+                        <!-- Single Contact Info Start -->
+                        <div class="single-contact-info">
+                            <div class="info-icon">
+                                <i class="far fa-globe" style="color: red;"></i>
+                            </div>
+                            <div class="info-content">
+                                <h5 class="title">Почта</h5>
+                                <p><a href="mailto://{{ setting.email }}">{{ setting.email }}</a></p>
+                            </div>
+                        </div>
+                        <!-- Single Contact Info End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact Form Start -->
+        <div class="contact-form section-padding-02 mt-n3">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <!-- Section Title Start -->
+                    <div class="section-title text-center">
+                        <h2 class="title1">Оставьте сообщение здесь</h2>
+                        <p class="title1">Если у вас возникли проблемы или же вопросы, напишите нам </p>
+                    </div>
+                    <!-- Section Title End -->
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="single-form">
+                                    <input type="text" name="name" placeholder="Имя" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="single-form">
+                                    <input type="email" name="email" placeholder="Почта" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="single-form">
+                                    <input type="text" name="title" placeholder="Заголовок" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="single-form">
+                                    <input type="text" name="phone" placeholder="Телефонный номер" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="single-form">
+                                    <textarea name="problem" placeholder="Напишите проблему..." class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <p class="form-message"></p>
+                            <div class="col-md-12">
+                                <div class="single-form text-center">
+                                    <button class="btn btn-primary btn-hover-dark">Отправить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Contact Form End -->
+    </div>
+</div>
+<!-- Contact Section End -->
+
+{% endblock %}

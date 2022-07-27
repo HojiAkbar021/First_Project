@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from apps.settings.models import Setting
-from apps.users.models import User
+from apps.users.models import User, UserComment
 from django.shortcuts import HttpResponse
 from apps.posts.models import Post, FavoritePost, Category, PostImage
 from django.contrib.auth import login, authenticate
@@ -116,6 +116,12 @@ def profile(request, slug):
             user.delete()
             return redirect('user_login')
     if request.method == "POST":
+        rating = request.POST.get('rating')
+        title =request.POST.get('title')
+        text =request.POST.get('text')
+        comment = UserComment.objects.create(user = request.user, comment_user = user, rating = 5, text = text, title = title)
+        return redirect('profile', user.slug)  
+    if request.method == "POST":
         if 'update' in request.POST:
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
@@ -153,3 +159,22 @@ def profile(request, slug):
         'counts' : counts,
     }
     return render(request, 'users/profile.html', context)
+
+def comment_index(request):
+    setting = Setting.objects.all()
+    comments = UserComment.objects.all()
+    if request.method == "POST":
+        if 'not_accept' in request.POST:
+            comment = UserComment.objects.get(id = comments.id)
+            comment.status_comment = "Не принята"
+            comment.save()
+            return redirect('comment_index')
+        if 'accept' in request.POST:
+            comment = UserComment.objects.get(id = comments.id)
+            comment.status_comment = "Принята"
+            comment.save()
+    context = {
+        'setting' : setting,
+        'comments' : comments,
+    }
+    return render(request, 'users/comment_index.html', context)

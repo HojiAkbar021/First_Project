@@ -1,0 +1,72 @@
+{% extends 'include/homepage.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .title1 {
+        color: red;
+    }
+</style>
+
+<!-- Page Banner Start -->
+<div class="page-section section" style="padding-top: 50px;">
+    <div class="text-center">
+        <h2 class="title1">Спасибо за обращение</h2>
+        <a href="{% url 'index' %}">Скоро вашу проблему рассмотрят наши специалисты и напишут ответ в вашу почту</a>
+    </div>
+</div>
+<!-- Page Banner End -->
+
+<!-- Contact Section Start -->
+<div class="section section-padding mt-n6">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Single Contact Info Start -->
+                    <div class="single-contact-info">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt" style="color: red;"></i>
+                        </div>
+                        <div class="info-content">
+                            <h5 class="title">Адрес</h5>
+                            <h4>{{ setting.address }}</h4>
+                        </div>
+                    </div>
+                    <!-- Single Contact Info End -->
+                </div>
+                <div class="col-md-4">
+                    <!-- Single Contact Info Start -->
+                    <div class="single-contact-info">
+                        <div class="info-icon">
+                            <i class="fas fa-phone" style="color: red;"></i>
+                        </div>
+                        <div class="info-content">
+                            <h5 class="title">Телефонный номер</h5>
+                            <h4><a href="tel:{{ setting.phone }}">{{ setting.phone }}</a></h4>
+                        </div>
+                    </div>
+                    <!-- Single Contact Info End -->
+                </div>
+                <div class="col-md-4">
+                    <!-- Single Contact Info Start -->
+                    <div class="single-contact-info">
+                        <div class="info-icon">
+                            <i class="far fa-globe" style="color: red;"></i>
+                        </div>
+                        <div class="info-content">
+                            <h5 class="title">Почта</h5>
+                            <h4><a href="mailto://{{ setting.email }}">{{ setting.email }}</a></h4>
+                        </div>
+                    </div>
+                    <!-- Single Contact Info End -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
